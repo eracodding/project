@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="kz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея – FitLife</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <div class="logo">FitLife</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Басты бет</a></li>
+                <li><a href="services.html">Қызметтер</a></li>
+                <li><a href="schedule.html">Кесте</a></li>
+                <li><a href="gallery.html" class="active">Галерея</a></li>
+                <li><a href="contact.html">Байланыс</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="gallery container">
+        <h2 class="section-title">Біздің зал</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://media.istockphoto.com/id/1211886784/photo/modern-gym-interior-with-sport-and-fitness-equipment-fitness-center-interior-interior-workout.jpg?s=612x612&w=0&k=20&c=MCmLSxq-tDeh6XEDWPRewkLJr-FZR734sdNQ3wbExTc=" alt="Зал 1"></div>
+            <div class="gallery-item"><img src="https://livefit.com/cdn/shop/articles/Colony_Lofts_Toledo_1_8fdd5cbc-086c-40ad-9367-d8884076c564.png?v=1763155869&width=1600" alt="Зал 2"></div>
+            <div class="gallery-item"><img src="https://wholesale.rdxsports.com/wp-content/uploads/2025/07/fitness-gym-design-layouts-with-examples.webp" alt="Групповые занятия"></div>
+            <div class="gallery-item"><img src="https://images.squarespace-cdn.com/content/v1/5696733025981d28a35ef8ab/1ac027c0-cae1-4d8a-9e58-32a8ad92680a/Fusion+BRB+cardio+room+BIOFIT+V3.jpeg" alt="Тренеры"></div>
+            <div class="gallery-item"><img src="https://as1.ftcdn.net/jpg/03/29/60/84/1000_F_329608479_vP9nFK795X8lWmoTa8DPhMgoewQ7U1lG.jpg" alt="Ресепшн"></div>
+            <div class="gallery-item"><img src="https://www.cgarchitect.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBd0tnQVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--14ef33376fc39c9966ea7decbee51bd79f44f708/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9VY21WemFYcGxYM1J2WDJ4cGJXbDBXd2RwQWxZRk1Eb0tjMkYyWlhKN0Jqb01jWFZoYkdsMGVXbGsiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a140f81341e053a34b77dbf5e04e777cacb11aff/cover.jpg" alt="Бассейн"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h3>FitLife</h3>
+                <p>Фитнес клуб – денсаулық және күш</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h3>Навигация</h3>
+                <a href="index.html">Басты бет</a>
+                <a href="services.html">Қызметтер</a>
+                <a href="schedule.html">Кесте</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="contact.html">Байланыс</a>
+            </div>
+            <div class="footer-column">
+                <h3>Байланыс</h3>
+                <p>Алматы, Абай даңғылы, 100</p>
+                <p>email: info@fitlife.kz</p>
+                <p>Тел: +7 (727) 300-40-50</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
