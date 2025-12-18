@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="kz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife – Фитнес клуб</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <div class="logo">FitLife</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Басты бет</a></li>
+                <li><a href="services.html">Қызметтер</a></li>
+                <li><a href="schedule.html">Кесте</a></li>
+                <li><a href="gallery.html">Галерея</a></li>
+                <li><a href="contact.html">Байланыс</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content container">
+            <h1>FitLife – Сенің фитнес клубың</h1>
+            <p>Заманауи жабдықтар, тәжірибелі жаттықтырушылар, топтық сабақтар</p>
+            <button onclick="location.href='schedule.html'">Абонемент сатып алу</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h3>FitLife</h3>
+                <p>Фитнес клуб – денсаулық және күш</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h3>Навигация</h3>
+                <a href="index.html">Басты бет</a>
+                <a href="services.html">Қызметтер</a>
+                <a href="schedule.html">Кесте</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="contact.html">Байланыс</a>
+            </div>
+            <div class="footer-column">
+                <h3>Байланыс</h3>
+                <p>Алматы, Абай даңғылы, 100</p>
+                <p>email: info@fitlife.kz</p>
+                <p>Тел: +7 (727) 300-40-50</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
