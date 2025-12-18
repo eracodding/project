@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="kz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife – Фитнес клуб</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; background: #f8f9fa; color: #333; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* МОДУЛЬ 1: NavBar */
+        header {
+            background: #0d47a1;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .logo { font-size: 36px; font-weight: bold; color: #ff6d00; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: #ff6d00; }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: #ff6d00;
+            bottom: -8px;
+            left: 0;
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .hamburger span {
+            width: 30px;
+            height: 4px;
+            background: white;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+        /* МОДУЛЬ 2: Hero */
+        .hero {
+            margin-top: 100px;
+            padding: 100px 0;
+            background: url('https://media.istockphoto.com/id/1211886784/photo/modern-gym-interior-with-sport-and-fitness-equipment-fitness-center-interior-interior-workout.jpg?s=612x612&w=0&k=20&c=MCmLSxq-tDeh6XEDWPRewkLJr-FZR734sdNQ3wbExTc=') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(13, 71, 161, 0.7);
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 { font-size: 56px; margin-bottom: 20px; }
+        .hero p { font-size: 26px; margin-bottom: 40px; }
+        .hero button {
+            background: #ff6d00;
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+        .hero button:hover { background: #e65100; transform: scale(1.05); }
+
+        .section-title { text-align: center; font-size: 42px; color: #0d47a1; margin: 80px 0 50px; }
+
+        /* МОДУЛЬ 3: Қызметтер */
+        .services {
+            padding: 80px 0;
+            background: white;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .service-card {
+            background: #e3f2fd;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .service-card:hover { transform: translateY(-10px); }
+        .service-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 20px; }
+        .service-card h3 { color: #0d47a1; margin-bottom: 15px; }
+
+        /* МОДУЛЬ 4: Галерея */
+        .gallery {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .gallery-item {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .gallery-item:hover { transform: scale(1.05); }
+        .gallery-item img { width: 100%; height: 300px; object-fit: cover; }
+
+        /* МОДУЛЬ 5: Акциялар */
+        .actions {
+            padding: 80px 0;
+            background: white;
+        }
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .action-card {
+            background: #e3f2fd;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .action-card:hover { transform: translateY(-10px); }
+        .action-card h3 { color: #0d47a1; margin-bottom: 15px; }
+        .action-card button {
+            background: #ff6d00;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin-top: 20px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        /* МОДУЛЬ 6: Байланыс және обратная связь */
+        .contact {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        .contact-info {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 20px;
+        }
+        .contact-info p { margin: 15px 0; }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #bbdefb;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        .contact-form textarea { height: 150px; resize: vertical; }
+        .contact-form button {
+            background: #ff6d00;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .contact-form button:hover { background: #e65100; transform: scale(1.03); }
+
+        /* МОДУЛЬ 7: Footer */
+        footer {
+            background: #0d47a1;
+            color: white;
+            padding: 80px 0 40px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .footer-column h3 { margin-bottom: 20px; color: #ff6d00; }
+        .footer-links a { color: #bbdefb; text-decoration: none; display: block; margin: 12px 0; transition: 0.3s; }
+        .footer-links a:hover { color: white; padding-left: 10px; }
+
+        @media (max-width: 992px) {
+            .services-grid, .gallery-grid, .actions-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #0d47a1;
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 30px;
+                transform: translateY(-100%);
+                transition: transform 0.4s ease;
+            }
+            .nav-links.active { transform: translateY(0); }
+            .hero h1 { font-size: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- МОДУЛЬ 1: NavBar -->
+    <header>
+        <div class="container navbar">
+            <div class="logo">FitLife</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Басты бет</a></li>
+                <li><a href="#services">Қызметтер</a></li>
+                <li><a href="#schedule">Кесте</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#contact">Байланыс</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- МОДУЛЬ 2: Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content container">
+            <h1>FitLife – Сенің фитнес клубың</h1>
+            <p>Заманауи жабдықтар, тәжірибелі жаттықтырушылар, топтық сабақтар</p>
+            <button>Абонемент сатып алу</button>
+        </div>
+    </section>
+
+    <!-- МОДУЛЬ 3: Қызметтер -->
+    <section class="services container" id="services">
+        <h2 class="section-title">Біздің қызметтер</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="https://media.gettyimages.com/id/2155324511/photo/diverse-group-of-students-doing-crescent-lunge-pose-during-yoga-class.jpg?s=612x612&w=gi&k=20&c=9aGQhI47DXkrF4FPpIioslDpsg24kMvyjkfhO29zdzY=" alt="Йога">
+                <h3>Йога және пилатес</h3>
+                <p>Топтық және жеке сабақтар</p>
+            </div>
+            <div class="service-card">
+                <img src="https://www.puregym.com/media/3f1pvvjw/the-best-gym-cardio-workouts_blogheader-notitle.jpg?quality=80" alt="Кардио">
+                <h3>Кардио және функционалды тренинг</h3>
+                <p>Жоғары интенсивті сабақтар</p>
+            </div>
+            <div class="service-card">
+                <img src="https://dfjx2uxqg3cgi.cloudfront.net/img/photo/183152/183152_00_2x.jpg?20190825063044" alt="Жеке жаттықтырушы">
+                <h3>Жеке жаттықтырушы</h3>
+                <p>Жеке бағдарлама және нәтижеге кепілдік</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- МОДУЛЬ 4: Галерея -->
+    <section class="gallery container" id="gallery">
+        <h2 class="section-title">Біздің зал</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://media.istockphoto.com/id/1211886784/photo/modern-gym-interior-with-sport-and-fitness-equipment-fitness-center-interior-interior-workout.jpg?s=612x612&w=0&k=20&c=MCmLSxq-tDeh6XEDWPRewkLJr-FZR734sdNQ3wbExTc=" alt="Зал 1"></div>
+            <div class="gallery-item"><img src="https://livefit.com/cdn/shop/articles/Colony_Lofts_Toledo_1_8fdd5cbc-086c-40ad-9367-d8884076c564.png?v=1763155869&width=1600" alt="Зал 2"></div>
+            <div class="gallery-item"><img src="https://wholesale.rdxsports.com/wp-content/uploads/2025/07/fitness-gym-design-layouts-with-examples.webp" alt="Групповые занятия"></div>
+            <div class="gallery-item"><img src="https://images.squarespace-cdn.com/content/v1/5696733025981d28a35ef8ab/1ac027c0-cae1-4d8a-9e58-32a8ad92680a/Fusion+BRB+cardio+room+BIOFIT+V3.jpeg" alt="Тренеры"></div>
+            <div class="gallery-item"><img src="https://as1.ftcdn.net/jpg/03/29/60/84/1000_F_329608479_vP9nFK795X8lWmoTa8DPhMgoewQ7U1lG.jpg" alt="Ресепшн"></div>
+            <div class="gallery-item"><img src="https://www.cgarchitect.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBd0tnQVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--14ef33376fc39c9966ea7decbee51bd79f44f708/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9VY21WemFYcGxYM1J2WDJ4cGJXbDBXd2RwQWxZRk1Eb0tjMkYyWlhKN0Jqb01jWFZoYkdsMGVXbGsiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--a140f81341e053a34b77dbf5e04e777cacb11aff/cover.jpg" alt="Бассейн"></div>
+        </div>
+    </section>
+
+    <!-- МОДУЛЬ 5: Акциялар -->
+    <section class="actions container" id="schedule">
+        <h2 class="section-title">Акциялар және кесте</h2>
+        <div class="actions-grid">
+            <div class="action-card">
+                <h3>Таңғы акция</h3>
+                <p>6:00 - 9:00 аралығында -20%</p>
+                <button>Толығырақ</button>
+            </div>
+            <div class="action-card">
+                <h3>Студенттік жеңілдік</h3>
+                <p>Студенттік билет бойынша -15%</p>
+                <button>Толығырақ</button>
+            </div>
+            <div class="action-card">
+                <h3>Семейлік абонемент</h3>
+                <p>Отбасымен келсеңіз арнайы баға</p>
+                <button>Толығырақ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- МОДУЛЬ 6: Байланыс және обратная связь -->
+    <section class="contact container" id="contact">
+        <h2 class="section-title">Байланыс және кері байланыс</h2>
+        <div class="contact-info">
+            <p>Адрес: Алматы, Абай даңғылы, 100</p>
+            <p>Email: info@fitlife.kz</p>
+            <p>Телефон: +7 (727) 300-40-50</p>
+            <p>Жұмыс уақыты: Дс–Жм 6:00–23:00, Сб–Жс 8:00–22:00</p>
+        </div>
+        <form class="contact-form">
+            <input type="text" placeholder="Аты-жөніңіз" required>
+            <input type="email" placeholder="Email" required>
+            <input type="tel" placeholder="Телефон">
+            <textarea placeholder="Хабарламаңыз" required></textarea>
+            <button type="submit">Жіберу</button>
+        </form>
+    </section>
+
+    <!-- МОДУЛЬ 7: Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h3>FitLife</h3>
+                <p>Фитнес клуб – денсаулық және күш</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h3>Навигация</h3>
+                <a href="#home">Басты бет</a>
+                <a href="#services">Қызметтер</a>
+                <a href="#schedule">Кесте</a>
+                <a href="#gallery">Галерея</a>
+                <a href="#contact">Байланыс</a>
+            </div>
+            <div class="footer-column">
+                <h3>Байланыс</h3>
+                <p>Алматы, Абай даңғылы, 100</p>
+                <p>email: info@fitlife.kz</p>
+                <p>Тел: +7 (727) 300-40-50</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
